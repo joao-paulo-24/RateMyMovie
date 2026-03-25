@@ -32,12 +32,19 @@ public class MovieController {
     }
 
     @GetMapping("/{id}")
-    public Movie getMovieById(@PathVariable long id){
+    public Movie getMovieById(@PathVariable long id) {
         return service.getMovieById(id);
     }
 
-    
-    //@GetMapping{}
+    @GetMapping("/search/{rating}")
+    public List<Movie> searchMovieByRating(@PathVariable int rating) {
+        return service.getMoviesByRating(rating);
+    }   
+
+    @GetMapping("/search/{title}")
+    public List<Movie> searchMovieByTitle(@PathVariable String title) {
+        return service.getMoviesByTitle(title);
+    }   
 
     @PostMapping
     public Movie createMovie (@Valid @RequestBody Movie movie){
