@@ -11,6 +11,7 @@ public class Movie {
     private long id;
 
     @NotBlank(message = "Title cannot be blank")
+    @Column(nullable = false)
     private String title;
 
     private String poster;

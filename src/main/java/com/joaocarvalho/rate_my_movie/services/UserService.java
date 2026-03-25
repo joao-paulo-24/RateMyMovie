@@ -1,0 +1,54 @@
+package com.joaocarvalho.rate_my_movie.services;
+
+import java.util.List;
+
+import com.joaocarvalho.rate_my_movie.exceptions.NotFoundException;
+import com.joaocarvalho.rate_my_movie.models.User;
+import com.joaocarvalho.rate_my_movie.repository.UserRepository;
+
+public class UserService {
+    private final UserRepository repository;
+
+    public UserService(UserRepository repository) {
+        this.repository = repository;
+    }
+
+    public List<User> getAllUsers () {
+        return repository.findAll();
+    }
+
+    public User getUserByUsername (String username){
+        return repository.findByUsername(username);
+    }
+
+    public User getUserByEmail (String email) {
+        return repository.findByEmail(email);
+    }
+
+    public User getUserById (Long id) {
+        return repository.findById(id).orElseThrow(() -> new NotFoundException("User not found"));
+    }
+
+    public User saveUser(User user) {
+        return repository.save(user);
+    }
+
+    public User updateUser (Long id, User newUser){
+        User user = repository.findById(id).orElseThrow(() -> new NotFoundException("User not found"));
+
+        user.setEmail(newUser.getEmail());
+        user.setUsername(newUser.getUsername());
+        user.setPassword(newUser.getPassword());
+
+        return repository.save(user);
+    }
+
+    public void deleteAllUsers() {
+        repository.deleteAll();
+    }
+
+    public void deleteUserById(Long id){
+        repository.deleteById(id);
+    }
+
+}
