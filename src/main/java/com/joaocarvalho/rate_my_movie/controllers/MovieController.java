@@ -39,7 +39,17 @@ public class MovieController {
     @GetMapping("/search/{rating}")
     public List<Movie> searchMovieByRating(@PathVariable int rating) {
         return service.getMoviesByRating(rating);
-    }   
+    }
+    
+    @GetMapping("/search/higher/{rating}")
+    public List<Movie> searchMovieByRatingGreaterThan(@PathVariable int rating) {
+        return service.getMoviesByRatingGreaterThan(rating);
+    }
+
+    @GetMapping("/search/lower/{rating}")
+    public List<Movie> searchMovieByRatingLowerThan(@PathVariable int rating) {
+        return service.getMoviesByRatingLowerThan(rating);
+    }
 
     @GetMapping("/search/{title}")
     public List<Movie> searchMovieByTitle(@PathVariable String title) {
