@@ -2,10 +2,13 @@ package com.joaocarvalho.rate_my_movie.services;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.joaocarvalho.rate_my_movie.exceptions.NotFoundException;
 import com.joaocarvalho.rate_my_movie.models.User;
 import com.joaocarvalho.rate_my_movie.repository.UserRepository;
 
+@Service
 public class UserService {
     private final UserRepository repository;
 

@@ -25,6 +25,10 @@ public class User {
     @NotBlank(message = "Password cannot be blank")
     private String password;
 
+    @ManyToOne
+    @Column(name = "moviesWatched", nullable = true)
+    private Movie moviesWatched;
+
     public User() {}
 
     public User(String username, String email, String password) {
