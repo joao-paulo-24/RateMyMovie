@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.*;
 
 import com.joaocarvalho.rate_my_movie.models.Review;
+import com.joaocarvalho.rate_my_movie.models.ReviewDTO;
 import com.joaocarvalho.rate_my_movie.services.ReviewService;
 
 @RestController
@@ -38,8 +39,12 @@ public class ReviewController {
     }
 
     @PostMapping
-    public Review createReview(@RequestBody Review review) {
-        return service.saveReview(review);
+    public Review createReview(@RequestBody ReviewDTO dto) {
+        return service.saveReview(
+                dto.getMovieId(),
+                dto.getUserId(),
+                dto.getText(),
+                dto.getRating());
     }
 
     @PutMapping("/{id}")

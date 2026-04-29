@@ -16,11 +16,9 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "movie", nullable = false)
     @ManyToOne
     private Movie movie;
 
-    @Column(name = "user", nullable = false)
     @ManyToOne
     private User user;
 
@@ -40,6 +38,9 @@ public class Review {
         this.user = user;
         this.text = text;
         this.rating = rating;
+    }
+
+    public Review(){
     }
 
     public long getId() {

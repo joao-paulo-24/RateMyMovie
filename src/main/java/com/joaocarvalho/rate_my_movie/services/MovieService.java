@@ -32,7 +32,7 @@ public class MovieService{
     }
 
      public List<Movie> getMoviesByRatingLowerThan(int rating){
-        return repository.findByRatingLowerThan(rating);
+        return repository.findByRatingLessThan(rating);
     }
     
     public List<Movie> getMoviesByTitle(String title){

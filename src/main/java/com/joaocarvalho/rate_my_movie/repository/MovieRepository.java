@@ -14,6 +14,6 @@ public interface MovieRepository extends JpaRepository<Movie, Long>{
 
     List<Movie> findByRatingGreaterThan(int rating);
 
-    List<Movie> findByRatingLowerThan(int rating);
+    List<Movie> findByRatingLessThan(int rating);
 
 }

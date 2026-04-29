@@ -26,7 +26,6 @@ public class User {
     private String password;
 
     @ManyToOne
-    @Column(name = "moviesWatched", nullable = true)
     private Movie moviesWatched;
 
     public User() {}
