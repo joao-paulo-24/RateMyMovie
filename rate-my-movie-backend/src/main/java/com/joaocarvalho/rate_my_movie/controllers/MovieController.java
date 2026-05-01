@@ -58,7 +58,7 @@ public class MovieController {
 
     @PostMapping
     public Movie createMovie (@Valid @RequestBody Movie movie){
-        if (movie.getTitle().isBlank() || movie.getTitle().isEmpty() || 0 > movie.getRating() || 10 < movie.getRating()){
+        if (!movie.getTitle().isBlank() && !movie.getTitle().isEmpty() && 0 < movie.getRating() && 10 >= movie.getRating()){
             return service.saveMovie(movie);
         }
 

@@ -14,6 +14,7 @@ public class Movie {
     @Column(nullable = false)
     private String title;
 
+    @Column(nullable = false)
     private String poster;
     
     @Min(value = 0, message = "Rating must be >= 0")
