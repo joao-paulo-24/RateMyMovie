@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.joaocarvalho.rate_my_movie.exceptions.NotFoundException;
 import com.joaocarvalho.rate_my_movie.models.User;
 import com.joaocarvalho.rate_my_movie.repository.UserRepository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Service
 public class UserService {
@@ -33,6 +34,7 @@ public class UserService {
     }
 
     public User saveUser(User user) {
+        user.setPassword(encoder.encode(user.getPassword()));
         return repository.save(user);
     }
 
@@ -54,4 +56,10 @@ public class UserService {
         repository.deleteById(id);
     }
 
+    private final BCryptPasswordEncoder encoder;
+
+    public UserService(UserRepository repository, BCryptPasswordEncoder encoder) {
+        this.repository = repository;
+        this.encoder = encoder;
+}
 }

@@ -1,27 +1,28 @@
-import { useEffect, useState } from "react";
-import { getMovies } from "./services/movieService";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import MovieList from "./components/MovieList";
+import MovieForm from "./components/CreateMovie";
+import { createMovie } from "./services/MovieService";
 
 function App() {
-  const [movies, setMovies] = useState([]);
-
-  useEffect(() => {
-    getMovies().then((data) => setMovies(data));
-  }, []);
+  const handleCreateMovie = async (movie) => {
+    try {
+      return await createMovie(movie);
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
+  };
 
   return (
-    <div>
-      <h1>Movies 🎬</h1>
-
-      <div>
-        {movies.map((movie) => (
-          <div key={movie.id}>
-            <h2>{movie.title}</h2>
-            <img src={movie.poster} width="150" />
-            <p>⭐ {movie.rating}</p>
-          </div>
-        ))}
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MovieList />} />
+        <Route
+          path="/create"
+          element={<MovieForm onMovieCreated={handleCreateMovie} />}
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
