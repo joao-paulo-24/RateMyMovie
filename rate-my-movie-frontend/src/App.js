@@ -1,6 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import MovieList from "./components/MovieList";
 import MovieForm from "./components/CreateMovie";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Navbar from "./components/Navbar";
+import ProtectedRoute from "./components/ProtectedRoute";
+
 import { createMovie } from "./services/MovieService";
 
 function App() {
@@ -15,12 +21,23 @@ function App() {
 
   return (
     <BrowserRouter>
+      <Navbar />
+
       <Routes>
         <Route path="/" element={<MovieList />} />
+
+        {/* 🔒 ROTA PROTEGIDA */}
         <Route
           path="/create"
-          element={<MovieForm onMovieCreated={handleCreateMovie} />}
+          element={
+            <ProtectedRoute>
+              <MovieForm onMovieCreated={handleCreateMovie} />
+            </ProtectedRoute>
+          }
         />
+
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   );

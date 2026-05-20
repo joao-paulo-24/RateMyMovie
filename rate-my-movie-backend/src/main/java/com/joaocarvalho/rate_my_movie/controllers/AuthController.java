@@ -1,28 +1,29 @@
+package com.joaocarvalho.rate_my_movie.controllers;
+
+import org.springframework.web.bind.annotation.*;
+
+import com.joaocarvalho.rate_my_movie.services.AuthService;
+import com.joaocarvalho.rate_my_movie.models.LoginRequest;
+import com.joaocarvalho.rate_my_movie.models.RegisterRequest;
+import com.joaocarvalho.rate_my_movie.models.AuthResponse;
+
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
-    private final UserRepository userRepository;
-    private final BCryptPasswordEncoder encoder;
+    private final AuthService service;
 
-    public AuthController(UserRepository userRepository, BCryptPasswordEncoder encoder) {
-        this.userRepository = userRepository;
-        this.encoder = encoder;
+    public AuthController(AuthService service) {
+        this.service = service;
+    }
+
+    @PostMapping("/register")
+    public AuthResponse register(@RequestBody RegisterRequest req) {
+        return service.register(req);
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody LoginRequest request) {
-
-        User user = userRepository.findByEmail(request.getEmail());
-
-        if (user == null) {
-            return "Invalid credentials";
-        }
-
-        if (!encoder.matches(request.getPassword(), user.getPassword())) {
-            return "Invalid credentials";
-        }
-
-        return "LOGIN SUCCESS (JWT will go here later)";
+    public AuthResponse login(@RequestBody LoginRequest req) {
+        return service.login(req);
     }
 }

@@ -13,10 +13,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class UserService {
     private final UserRepository repository;
 
-    public UserService(UserRepository repository) {
-        this.repository = repository;
-    }
-
     public List<User> getAllUsers () {
         return repository.findAll();
     }

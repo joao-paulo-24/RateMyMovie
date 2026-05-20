@@ -1,4 +1,4 @@
-package com.joaocarvalho.ratemymovie.models;
+package com.joaocarvalho.rate_my_movie.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
