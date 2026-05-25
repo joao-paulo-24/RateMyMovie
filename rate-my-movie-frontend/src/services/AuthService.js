@@ -1,31 +1,41 @@
-const API_URL = "http://localhost:8080"; 
+const API_URL = "http://localhost:8080/auth";
 
 export const AuthService = {
-  login: async (email, password) => {
-    const response = await fetch(`${API_URL}/auth/login`, {
+  async login(email, password) {
+    const response = await fetch(`${API_URL}/login`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({ email, password }),
     });
-
-    if (!response.ok) {
-      throw new Error("Login failed");
-    }
 
     const data = await response.json();
 
     localStorage.setItem("token", data.token);
 
+    localStorage.setItem(
+      "user",
+      JSON.stringify({
+        id: data.id,
+        username: data.username,
+        email: data.email,
+      })
+    );
+
     return data;
   },
 
-  logout: () => {
+  logout() {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
   },
 
-  getToken: () => localStorage.getItem("token"),
+  getToken() {
+    return localStorage.getItem("token");
+  },
 
-  isAuthenticated: () => !!localStorage.getItem("token")
+  isAuthenticated() {
+    return !!localStorage.getItem("token");
+  }
 };

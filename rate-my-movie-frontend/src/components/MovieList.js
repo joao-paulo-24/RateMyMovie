@@ -32,14 +32,17 @@ function MovieList() {
             <h3>{movie.title}</h3>
 
             {movie.poster && (
-              <img
-                src={movie.poster}
-                alt={"NO IMAGE"}
-                width="100"
-              />
+              <img src={movie.poster} alt="NO IMAGE" width="100" />
             )}
 
             <p>Rating: {movie.rating}</p>
+
+            <Link to={`/review/${movie.id}`}>
+              <button>Review</button>
+            </Link>
+            <Link to={`/reviews/${movie.id}`}>
+              <button>View Reviews</button>
+            </Link>
           </li>
         ))}
       </ul>

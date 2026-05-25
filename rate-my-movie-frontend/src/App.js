@@ -6,6 +6,8 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ReviewMovie from "./components/MovieReview";
+import ReviewsList from "./components/ReviewsList";
 
 import { createMovie } from "./services/MovieService";
 
@@ -38,6 +40,15 @@ function App() {
 
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route
+          path="/review/:id"
+          element={
+            <ProtectedRoute>
+              <ReviewMovie />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/reviews/:id" element={<ReviewsList />} />
       </Routes>
     </BrowserRouter>
   );
